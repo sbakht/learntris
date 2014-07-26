@@ -1,8 +1,23 @@
+require_relative "Matrix"
 
-cmd = gets.chomp
-
-if cmd == "q"
-
-elsif cmd == "p"
-    print ". . . . . . . . . .\n" * 22
+def genEmptyMatrix
+     return ". . . . . . . . . .\n" * 22
 end
+
+matrix = Matrix.new
+matrix.setCleared
+while 
+    cmd = gets.chomp
+
+    if cmd == "q"
+        break
+    elsif cmd == "p"
+        matrix.print
+    elsif cmd == "g"
+        matrix.setFromInput
+    elsif cmd == "c"
+        matrix.setCleared
+    end
+end
+
+
