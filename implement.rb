@@ -1,29 +1,33 @@
 require_relative "Matrix"
 
-def genEmptyMatrix
-     return ". . . . . . . . . .\n" * 22
-end
-
 matrix = Matrix.new
 
 while 
     cmd = gets.chomp
 
-    if cmd == "q"
+    case cmd
+    when "q"
         break
-    elsif cmd == "p"
+    when "p"
         matrix.print
-    elsif cmd == "g"
+    when "g"
         matrix.setFromInput
-    elsif cmd == "c"
+    when "c"
         matrix.setCleared
-    elsif cmd == "?s"
+    when "?s"
         matrix.printScore
-    elsif cmd == "?n"
+    when "?n"
         matrix.printNumCleared
-    elsif cmd == "s"
+    when "s"
         matrix.clearBlocks
+    when "I"
+        matrix.setActiveTetramino("I")
+    when "O"
+        matrix.setActiveTetramino("O")
+    when "t"
+        matrix.printActiveTetramino
     end
+
 end
 
 
