@@ -5,7 +5,7 @@ def genEmptyMatrix
 end
 
 matrix = Matrix.new
-matrix.setCleared
+
 while 
     cmd = gets.chomp
 
@@ -17,6 +17,12 @@ while
         matrix.setFromInput
     elsif cmd == "c"
         matrix.setCleared
+    elsif cmd == "?s"
+        matrix.printScore
+    elsif cmd == "?n"
+        matrix.printNumCleared
+    elsif cmd == "s"
+        matrix.clearBlocks
     end
 end
 
