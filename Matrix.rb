@@ -90,10 +90,8 @@ class Matrix
 			# puts ". . ."
 		end
 		if @activeTetramino == "S"
-			@letter1 = [1,0]
-			@letter2 = [2,0]
-			@letter3 = [0,1]
-			@letter4 = [1,1]
+			@letterLoc = [[0,1],[0,2],[1,0],[1,1]]
+			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
 			# puts ". g g"
 			# puts "g g ."
 			# puts ". . ."
@@ -180,12 +178,31 @@ class Matrix
 			moveBlock(2, 0, 0, letterLocTemp, letter)
 			moveBlock(3, -1, 0, letterLocTemp, letter)
 			@rotations = 3
-		# elsif @rotations == 3
-		# 	moveBlock(0, -2, -1, letterLocTemp, letter)
-		# 	moveBlock(1, -2, 0, letterLocTemp, letter)
-		# 	moveBlock(2, -2, 1, letterLocTemp, letter)
-		# 	moveBlock(3, -2, 2, letterLocTemp, letter)
-		# 	@rotations = 4
+		end
+	end
+
+	def rotateS
+		letterLocTemp = @letterLoc[3]
+		removeBeforeRotate
+		letter = "g"
+		if @rotations == 0
+			moveBlock(0, -1, 0, letterLocTemp, letter)
+			moveBlock(1, 0, 1, letterLocTemp, letter)
+			moveBlock(2, 1, 1, letterLocTemp, letter)
+			moveBlock(3, 0, 0, letterLocTemp, letter)
+			@rotations = 1
+		elsif @rotations == 1
+			moveBlock(0, 0, 1, letterLocTemp, letter)
+			moveBlock(1, 1, 0, letterLocTemp, letter)
+			moveBlock(2, 1, -1, letterLocTemp, letter)
+			moveBlock(3, 0, 0, letterLocTemp, letter)
+			@rotations = 2
+		elsif @rotations == 2
+			moveBlock(0, 0, -1, letterLocTemp, letter)
+			moveBlock(1, 1, 0, letterLocTemp, letter)
+			moveBlock(2, -1, -1, letterLocTemp, letter)
+			moveBlock(3, 0, 0, letterLocTemp, letter)
+			@rotations = 3
 		end
 	end
 
@@ -195,6 +212,8 @@ class Matrix
 			rotateI
 		when "Z"
 			rotateZ
+		when "S"
+			rotateS
 		end
 
 	end
@@ -232,9 +251,19 @@ class Matrix
 			# puts ". . ."
 		end
 		if @activeTetramino == "S"
-			puts ". g g"
-			puts "g g ."
-			puts ". . ."
+			if @rotations == 0
+				@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
+				@matrix[@letterLoc[0][0]][@letterLoc[0][1]] = "g"
+				@matrix[@letterLoc[1][0]][@letterLoc[1][1]] = "g"
+				@matrix[@letterLoc[2][0]][@letterLoc[2][1]] = "g"
+				@matrix[@letterLoc[3][0]][@letterLoc[3][1]] = "g"
+			end
+			@matrix.each do |line|
+				puts line.join(' ')
+			end
+			# puts ". g g"
+			# puts "g g ."
+			# puts ". . ."
 		end
 		if @activeTetramino == "J"
 			puts "b . ."
