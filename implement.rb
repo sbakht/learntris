@@ -28,6 +28,14 @@ while
             matrix.setActiveTetramino("O")
         when "Z"
             matrix.setActiveTetramino("Z")
+        when "S"
+            matrix.setActiveTetramino("S")
+        when "J"
+            matrix.setActiveTetramino("J")
+        when "L"
+            matrix.setActiveTetramino("L")
+        when "T"
+            matrix.setActiveTetramino("T")
         when "t"
             matrix.printActiveTetramino
         end
