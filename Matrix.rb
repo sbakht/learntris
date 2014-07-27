@@ -9,6 +9,7 @@ class Matrix
 	@letter4 = ""
 	@rotations = 0
 	@arrTetramino = []
+	@letterLoc = [[],[],[],[]]
 
 	def initialize
 		@matrix = @matrix = ". . . . . . . . . .\n" * 22
@@ -21,6 +22,7 @@ class Matrix
 		@letter4 = ""
 		@rotations = 0
 		@arrTetramino = []
+		@letterLoc = [[],[],[],[]]
 	end
 
 	def setCleared
@@ -69,6 +71,7 @@ class Matrix
 	def setActiveTetramino(char)
 		@activeTetramino = char
 		if @activeTetramino == "I"
+			@letterLoc = [[1,0],[1,1],[1,2],[1,3]]
 			@letter1 = [1,0]
 			@letter2 = [1,1]
 			@letter3 = [1,2]
@@ -131,33 +134,35 @@ class Matrix
 
 	def rotate
 		@arrTetramino = [['.','.','.','.'],['.','.','.','.'],['.','.','.','.'],['.','.','.','.']]
+		x = @letter1[0]
+		y = @letter1[1]
 		if @rotations == 0
-			@arrTetramino[@letter1[0] - 1][@letter1[1] + 2] = "c"
-			@arrTetramino[@letter1[0]][@letter1[1] + 2] = "c"
-			@arrTetramino[@letter1[0] + 1][@letter1[1] + 2] = "c"
-			@arrTetramino[@letter1[0] + 2][@letter1[1] + 2] = "c"
-			@letter1 = [@letter1[0] - 1, @letter1[1] + 2]
-			# @letter1 = [@letter1[0] - 1, @letter1[0] + 2]
+			@arrTetramino[x - 1][y + 2] = "c"
+			@arrTetramino[x][y + 2] = "c"
+			@arrTetramino[x + 1][y + 2] = "c"
+			@arrTetramino[x + 2][y + 2] = "c"
+			@letter1 = [x - 1, y + 2]
+			# @letter1 = [x - 1, x + 2]
 			@rotations = 1
 		elsif @rotations == 1
-			@arrTetramino[@letter1[0] + 2][@letter1[1] + 1] = "c"
-			@arrTetramino[@letter1[0] + 2][@letter1[1]] = "c"
-			@arrTetramino[@letter1[0] + 2][@letter1[1] - 1] = "c"
-			@arrTetramino[@letter1[0] + 2][@letter1[1] - 2] = "c"
-			@letter1 = [@letter1[0] + 2, @letter1[1] + 1]
+			@arrTetramino[x + 2][y + 1] = "c"
+			@arrTetramino[x + 2][y] = "c"
+			@arrTetramino[x + 2][y - 1] = "c"
+			@arrTetramino[x + 2][y - 2] = "c"
+			@letter1 = [x + 2, y + 1]
 			@rotations = 2
 		elsif @rotations == 2
-			@arrTetramino[@letter1[0] + 1][@letter1[1] - 2] = "c"
-			@arrTetramino[@letter1[0]][@letter1[1] - 2] = "c"
-			@arrTetramino[@letter1[0] - 1][@letter1[1] - 2] = "c"
-			@arrTetramino[@letter1[0] - 2][@letter1[1] - 2] = "c"
-			@letter1 = [@letter1[0] + 1, @letter1[1] - 2]
+			@arrTetramino[x + 1][y - 2] = "c"
+			@arrTetramino[x][y - 2] = "c"
+			@arrTetramino[x - 1][y - 2] = "c"
+			@arrTetramino[x - 2][y - 2] = "c"
+			@letter1 = [x + 1, y - 2]
 			@rotations = 3
 		elsif @rotations == 3
-			@arrTetramino[@letter1[0] - 2][@letter1[1] - 1] = "c"
-			@arrTetramino[@letter1[0] - 2][@letter1[1]] = "c"
-			@arrTetramino[@letter1[0] - 2][@letter1[1] + 1] = "c"
-			@arrTetramino[@letter1[0] - 2][@letter1[1] + 2] = "c"
+			@arrTetramino[x - 2][y - 1] = "c"
+			@arrTetramino[x - 2][y] = "c"
+			@arrTetramino[x - 2][y + 1] = "c"
+			@arrTetramino[x - 2][y + 2] = "c"
 			@letter1 = [@letter1[0] - 2, @letter1[1] - 1]
 			@rotations = 0
 		end
