@@ -11,7 +11,7 @@ while
         when "q"
             exit #exits the code
         when "p"
-            matrix.print
+            matrix.show
         when "g"
             matrix.setFromInput
         when "c"
@@ -36,6 +36,8 @@ while
             matrix.setActiveTetramino("L")
         when "T"
             matrix.setActiveTetramino("T")
+        when ")"
+            matrix.rotate
         when "t"
             matrix.printActiveTetramino
         end
