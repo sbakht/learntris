@@ -40,6 +40,8 @@ while
             matrix.rotate
         when "t"
             matrix.printActiveTetramino
+        when ";"
+            puts "\n"
         end
     end
 
