@@ -116,28 +116,31 @@ class Matrix
 			# puts ". . ."
 		end
 		if @activeTetramino == "J"
-			@letter1 = [0,0]
-			@letter2 = [0,1]
-			@letter3 = [1,1]
-			@letter4 = [2,1]
+			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
+			@letterLoc = [[0,0],[1,0],[1,1],[1,2]]
+			@letterLoc.each do |letter|
+				@matrix[letter[0]][letter[1]] = "b"
+			end
 			# puts "b . ."
 			# puts "b b b"
 			# puts ". . ."
 		end
 		if @activeTetramino == "L"
-			@letter1 = [2,0]
-			@letter2 = [0,1]
-			@letter3 = [1,1]
-			@letter4 = [2,1]
+			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
+			@letterLoc = [[0,2],[1,0],[1,1],[1,2]]
+			@letterLoc.each do |letter|
+				@matrix[letter[0]][letter[1]] = "o"
+			end
 			# puts ". . o"
 			# puts "o o o"
 			# puts ". . ."
 		end
 		if @activeTetramino == "T"
-			@letter1 = [1,0]
-			@letter2 = [0,1]
-			@letter3 = [1,1]
-			@letter4 = [2,1]
+			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
+			@letterLoc = [[0,1],[1,0],[1,1],[1,2]]
+			@letterLoc.each do |letter|
+				@matrix[letter[0]][letter[1]] = "m"
+			end
 			# puts ". m ."
 			# puts "m m m"
 			# puts ". . ."
@@ -225,6 +228,82 @@ class Matrix
 		end
 	end
 
+
+	def rotateJ
+		letterLocTemp = @letterLoc[2]
+		removeBeforeRotate
+		letter = "b"
+		if @rotations == 0
+			moveBlock(0, -1, 1, letterLocTemp, letter)
+			moveBlock(1, -1, 0, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 1, 0, letterLocTemp, letter)
+			@rotations = 1
+		elsif @rotations == 1
+			moveBlock(0, 0, -1, letterLocTemp, letter)
+			moveBlock(1, 0, 1, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 1, 1, letterLocTemp, letter)
+			@rotations = 2
+		elsif @rotations == 2
+			moveBlock(0, -1, 0, letterLocTemp, letter)
+			moveBlock(1, 1, 0, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 1, -1, letterLocTemp, letter)
+			@rotations = 3
+		end
+	end
+
+	def rotateL
+		letterLocTemp = @letterLoc[2]
+		removeBeforeRotate
+		letter = "o"
+		if @rotations == 0
+			moveBlock(0, -1, 0, letterLocTemp, letter)
+			moveBlock(1, 1, 0, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 1, 1, letterLocTemp, letter)
+			@rotations = 1
+		elsif @rotations == 1
+			moveBlock(0, 0, -1, letterLocTemp, letter)
+			moveBlock(1, 0, 1, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 1, -1, letterLocTemp, letter)
+			@rotations = 2
+		elsif @rotations == 2
+			moveBlock(0, 1, 0, letterLocTemp, letter)
+			moveBlock(1, -1, -1, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, -1, 0, letterLocTemp, letter)
+			@rotations = 3
+		end
+	end
+
+	def rotateT
+		letterLocTemp = @letterLoc[2]
+		removeBeforeRotate
+		letter = "m"
+		if @rotations == 0
+			moveBlock(0, -1, 0, letterLocTemp, letter)
+			moveBlock(1, 1, 0, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 0, 1, letterLocTemp, letter)
+			@rotations = 1
+		elsif @rotations == 1
+			moveBlock(0, 0, -1, letterLocTemp, letter)
+			moveBlock(1, 0, 1, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 1, 0, letterLocTemp, letter)
+			@rotations = 2
+		elsif @rotations == 2
+			moveBlock(0, 1, 0, letterLocTemp, letter)
+			moveBlock(1, -1, 0, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 0, -1, letterLocTemp, letter)
+			@rotations = 3
+		end
+	end
+
 	def rotate
 		case @activeTetramino
 		when "I"
@@ -233,6 +312,12 @@ class Matrix
 			rotateZ
 		when "S"
 			rotateS
+		when "J"
+			rotateJ
+		when "L"
+			rotateL
+		when "T"
+			rotateT
 		end
 
 	end
@@ -259,19 +344,22 @@ class Matrix
 			# puts ". . ."
 		end
 		if @activeTetramino == "J"
-			puts "b . ."
-			puts "b b b"
-			puts ". . ."
+			show
+			# puts "b . ."
+			# puts "b b b"
+			# puts ". . ."
 		end
 		if @activeTetramino == "L"
-			puts ". . o"
-			puts "o o o"
-			puts ". . ."
+			show
+			# puts ". . o"
+			# puts "o o o"
+			# puts ". . ."
 		end
 		if @activeTetramino == "T"
-			puts ". m ."
-			puts "m m m"
-			puts ". . ."
+			show
+			# puts ". m ."
+			# puts "m m m"
+			# puts ". . ."
 		end
 	end
 
