@@ -322,47 +322,6 @@ class Matrix
 
 	end
 
-	def printActiveTetramino
-		if @activeTetramino == "I"
-			show
-		end
-		if @activeTetramino == "O"
-			show
-			# puts "y y"
-			# puts "y y"
-		end
-		if @activeTetramino == "Z"
-			show
-			# puts "r r ."
-			# puts ". r r"
-			# puts ". . ."
-		end
-		if @activeTetramino == "S"
-			show
-			# puts ". g g"
-			# puts "g g ."
-			# puts ". . ."
-		end
-		if @activeTetramino == "J"
-			show
-			# puts "b . ."
-			# puts "b b b"
-			# puts ". . ."
-		end
-		if @activeTetramino == "L"
-			show
-			# puts ". . o"
-			# puts "o o o"
-			# puts ". . ."
-		end
-		if @activeTetramino == "T"
-			show
-			# puts ". m ."
-			# puts "m m m"
-			# puts ". . ."
-		end
-	end
-
 	def removeBeforeRotate
 		@matrix[@letterLoc[0][0]][@letterLoc[0][1]] = "."
 		@matrix[@letterLoc[1][0]][@letterLoc[1][1]] = "."
