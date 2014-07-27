@@ -84,6 +84,7 @@ class Matrix
 		end
 		if @activeTetramino == "Z"
 			@letterLoc = [[0,0],[0,1],[1,1],[1,2]]
+			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
 			# puts "r r ."
 			# puts ". r r"
 			# puts ". . ."
@@ -126,35 +127,74 @@ class Matrix
 		end
 	end
 
-	def rotate
-		x = @letterLoc[0][0]
-		y = @letterLoc[0][1]
+	def rotateI
 		letterLocTemp = @letterLoc[0]
 		removeBeforeRotate
+		letter = "c"
 		if @rotations == 0
-			moveBlock(0, -1, 2, letterLocTemp)
-			moveBlock(1, 0, 2, letterLocTemp)
-			moveBlock(2, 1, 2, letterLocTemp)
-			moveBlock(3, 2, 2, letterLocTemp)
+			moveBlock(0, -1, 2, letterLocTemp, letter)
+			moveBlock(1, 0, 2, letterLocTemp, letter)
+			moveBlock(2, 1, 2, letterLocTemp, letter)
+			moveBlock(3, 2, 2, letterLocTemp, letter)
 			@rotations = 1
 		elsif @rotations == 1
-			moveBlock(0, 2, 1, letterLocTemp)
-			moveBlock(1, 2, 0, letterLocTemp)
-			moveBlock(2, 2, -1, letterLocTemp)
-			moveBlock(3, 2, -2, letterLocTemp)
+			moveBlock(0, 2, 1, letterLocTemp, letter)
+			moveBlock(1, 2, 0, letterLocTemp, letter)
+			moveBlock(2, 2, -1, letterLocTemp, letter)
+			moveBlock(3, 2, -2, letterLocTemp, letter)
 			@rotations = 2
 		elsif @rotations == 2
-			moveBlock(0, 1, -2, letterLocTemp)
-			moveBlock(1, 0, -2, letterLocTemp)
-			moveBlock(2, -1, -2, letterLocTemp)
-			moveBlock(3, -2, -2, letterLocTemp)
+			moveBlock(0, 1, -2, letterLocTemp, letter)
+			moveBlock(1, 0, -2, letterLocTemp, letter)
+			moveBlock(2, -1, -2, letterLocTemp, letter)
+			moveBlock(3, -2, -2, letterLocTemp, letter)
 			@rotations = 3
 		elsif @rotations == 3
-			moveBlock(0, -2, -1, letterLocTemp)
-			moveBlock(1, -2, 0, letterLocTemp)
-			moveBlock(2, -2, 1, letterLocTemp)
-			moveBlock(3, -2, 2, letterLocTemp)
+			moveBlock(0, -2, -1, letterLocTemp, letter)
+			moveBlock(1, -2, 0, letterLocTemp, letter)
+			moveBlock(2, -2, 1, letterLocTemp, letter)
+			moveBlock(3, -2, 2, letterLocTemp, letter)
 			@rotations = 4
+		end
+	end
+
+	def rotateZ
+		letterLocTemp = @letterLoc[2]
+		removeBeforeRotate
+		letter = "r"
+		if @rotations == 0
+			moveBlock(0, -1, 1, letterLocTemp, letter)
+			moveBlock(1, 0, 1, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 1, 0, letterLocTemp, letter)
+			@rotations = 1
+		elsif @rotations == 1
+			moveBlock(0, 0, -1, letterLocTemp, letter)
+			moveBlock(1, 1, 0, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, 1, 1, letterLocTemp, letter)
+			@rotations = 2
+		elsif @rotations == 2
+			moveBlock(0, 1, -1, letterLocTemp, letter)
+			moveBlock(1, 0, -1, letterLocTemp, letter)
+			moveBlock(2, 0, 0, letterLocTemp, letter)
+			moveBlock(3, -1, 0, letterLocTemp, letter)
+			@rotations = 3
+		# elsif @rotations == 3
+		# 	moveBlock(0, -2, -1, letterLocTemp, letter)
+		# 	moveBlock(1, -2, 0, letterLocTemp, letter)
+		# 	moveBlock(2, -2, 1, letterLocTemp, letter)
+		# 	moveBlock(3, -2, 2, letterLocTemp, letter)
+		# 	@rotations = 4
+		end
+	end
+
+	def rotate
+		case @activeTetramino
+		when "I"
+			rotateI
+		when "Z"
+			rotateZ
 		end
 
 	end
@@ -171,20 +211,25 @@ class Matrix
 			@matrix.each do |line|
 				puts line.join(' ')
 			end
-			# print arr
-			# puts ". . . ."
-			# puts ". . . ."
-			# puts "c c c c"
-			# puts ". . . ."
 		end
 		if @activeTetramino == "O"
 			puts "y y"
 			puts "y y"
 		end
 		if @activeTetramino == "Z"
-			puts "r r ."
-			puts ". r r"
-			puts ". . ."
+			if @rotations == 0
+				@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
+				@matrix[@letterLoc[0][0]][@letterLoc[0][1]] = "r"
+				@matrix[@letterLoc[1][0]][@letterLoc[1][1]] = "r"
+				@matrix[@letterLoc[2][0]][@letterLoc[2][1]] = "r"
+				@matrix[@letterLoc[3][0]][@letterLoc[3][1]] = "r"
+			end
+			@matrix.each do |line|
+				puts line.join(' ')
+			end
+			# puts "r r ."
+			# puts ". r r"
+			# puts ". . ."
 		end
 		if @activeTetramino == "S"
 			puts ". g g"
@@ -215,10 +260,10 @@ class Matrix
 		@matrix[@letterLoc[3][0]][@letterLoc[3][1]] = "."
 	end
 
-	def moveBlock(letterLocIndex, xMove, yMove, letterLocTemp)
+	def moveBlock(letterLocIndex, xMove, yMove, letterLocTemp, letter)
 		x = letterLocTemp[0]
 		y = letterLocTemp[1]
-		@matrix[x + xMove][y + yMove] = "c"
+		@matrix[x + xMove][y + yMove] = letter
 		@letterLoc[letterLocIndex] = [x + xMove, y + yMove]
 	end
 
