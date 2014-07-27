@@ -51,7 +51,13 @@ class Matrix
 	end
 
 	def show
-		puts @matrix
+		if @matrix.is_a?(Array) #turns into string if is an array
+			@matrix.each do |line|
+				puts line.join(' ')
+			end
+		else
+			puts @matrix
+		end
 	end
 
 	def printScore
@@ -76,22 +82,35 @@ class Matrix
 
 		if @activeTetramino == "I"
 			@letterLoc = [[1,0],[1,1],[1,2],[1,3]]
+			@letterLoc.each do |letter|
+				@matrix[letter[0]][letter[1]] = "c"
+			end
 		end
 		if @activeTetramino == "O"
+			@matrix = [['.','.'],['.','.']]
 			@letterLoc = [[0,0],[0,1],[1,0],[1,1]]
+			@letterLoc.each do |letter|
+				@matrix[letter[0]][letter[1]] = "y"
+			end
 			# puts "y y"
 			# puts "y y"
 		end
 		if @activeTetramino == "Z"
-			@letterLoc = [[0,0],[0,1],[1,1],[1,2]]
 			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
+			@letterLoc = [[0,0],[0,1],[1,1],[1,2]]
+			@letterLoc.each do |letter|
+				@matrix[letter[0]][letter[1]] = "r"
+			end
 			# puts "r r ."
 			# puts ". r r"
 			# puts ". . ."
 		end
 		if @activeTetramino == "S"
-			@letterLoc = [[0,1],[0,2],[1,0],[1,1]]
 			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
+			@letterLoc = [[0,1],[0,2],[1,0],[1,1]]
+			@letterLoc.each do |letter|
+				@matrix[letter[0]][letter[1]] = "g"
+			end
 			# puts ". g g"
 			# puts "g g ."
 			# puts ". . ."
@@ -220,47 +239,21 @@ class Matrix
 
 	def printActiveTetramino
 		if @activeTetramino == "I"
-			if @rotations == 0
-				@matrix = [['.','.','.','.'],['.','.','.','.'],['.','.','.','.'],['.','.','.','.']]
-				@matrix[@letterLoc[0][0]][@letterLoc[0][1]] = "c"
-				@matrix[@letterLoc[1][0]][@letterLoc[1][1]] = "c"
-				@matrix[@letterLoc[2][0]][@letterLoc[2][1]] = "c"
-				@matrix[@letterLoc[3][0]][@letterLoc[3][1]] = "c"
-			end
-			@matrix.each do |line|
-				puts line.join(' ')
-			end
+			show
 		end
 		if @activeTetramino == "O"
-			puts "y y"
-			puts "y y"
+			show
+			# puts "y y"
+			# puts "y y"
 		end
 		if @activeTetramino == "Z"
-			if @rotations == 0
-				@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
-				@matrix[@letterLoc[0][0]][@letterLoc[0][1]] = "r"
-				@matrix[@letterLoc[1][0]][@letterLoc[1][1]] = "r"
-				@matrix[@letterLoc[2][0]][@letterLoc[2][1]] = "r"
-				@matrix[@letterLoc[3][0]][@letterLoc[3][1]] = "r"
-			end
-			@matrix.each do |line|
-				puts line.join(' ')
-			end
+			show
 			# puts "r r ."
 			# puts ". r r"
 			# puts ". . ."
 		end
 		if @activeTetramino == "S"
-			if @rotations == 0
-				@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
-				@matrix[@letterLoc[0][0]][@letterLoc[0][1]] = "g"
-				@matrix[@letterLoc[1][0]][@letterLoc[1][1]] = "g"
-				@matrix[@letterLoc[2][0]][@letterLoc[2][1]] = "g"
-				@matrix[@letterLoc[3][0]][@letterLoc[3][1]] = "g"
-			end
-			@matrix.each do |line|
-				puts line.join(' ')
-			end
+			show
 			# puts ". g g"
 			# puts "g g ."
 			# puts ". . ."
