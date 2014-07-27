@@ -39,7 +39,7 @@ while
         when ")"
             matrix.rotate
         when "t"
-            matrix.printActiveTetramino
+            matrix.show
         when ";"
             puts "\n"
         end
