@@ -87,7 +87,15 @@ class Matrix
 	end
 
 	def moveLeft
-		@activeBlock.move(0,-1)
+		@activeBlock.move(0, -1)
+	end
+
+	def moveRight
+		@activeBlock.move(0, 1)
+	end
+
+	def moveDown
+		@activeBlock.move(1, 0)
 	end
 
 	def getMatrix

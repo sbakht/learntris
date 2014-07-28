@@ -56,6 +56,10 @@ while
                 matrix.rotate
             when "<"
                 matrix.moveLeft
+            when ">"
+                matrix.moveRight
+            when "v"
+                matrix.moveDown
             when "t"
                 matrix.showTest
             when ";"
