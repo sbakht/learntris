@@ -48,7 +48,7 @@ while
             when ")"
                 matrix.rotate
             when "t"
-                matrix.show
+                matrix.showTest
             when ";"
                 puts "\n"
             end

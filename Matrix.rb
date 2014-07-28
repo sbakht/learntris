@@ -1,31 +1,20 @@
 require_relative "Block"
-require_relative "Rotations"
+require_relative "I_Block"
+require_relative "O_Block"
+require_relative "Z_Block"
+require_relative "S_Block"
+require_relative "J_Block"
+require_relative "L_Block"
+require_relative "T_Block"
 
 class Matrix
-	@matrix = ""
-	@score = 0
-	@numCleared = 0
-	@activeTetramino = ""
-	@letter1 = ""
-	@letter2 = ""
-	@letter3 = ""
-	@letter4 = ""
-	@rotations = 0
-	@arrTetramino = []
-	@letterLoc = [[],[],[],[]]
 
 	def initialize
 		@matrix = @matrix = ". . . . . . . . . .\n" * 22
 		@score = 0
 		@numCleared = 0
-		@activeTetramino = ""
-		@letter1 = ""
-		@letter2 = ""
-		@letter3 = ""
-		@letter4 = ""
 		@rotations = 0
-		@arrTetramino = [['.','.','.','.'],['.','.','.','.'],['.','.','.','.'],['.','.','.','.']]
-		@letterLoc = [[],[],[],[]]
+		@activeBlock = nil
 	end
 
 	def setCleared
@@ -61,44 +50,15 @@ class Matrix
 		end
 	end
 
-	def showWithTetramino
-		case @activeTetramino
-		when "O"
-			@letterLoc.each do |letter|
-				letter[1] += 4
-				@matrix[letter[0]][letter[1]] = "Y"
-			end
-		when "L"
-			@letterLoc.each do |letter|
-				letter[1] += 3
-				@matrix[letter[0]][letter[1]] = "O"
-			end
-		when "J"
-			@letterLoc.each do |letter|
-				letter[1] += 3
-				@matrix[letter[0]][letter[1]] = "B"
-			end
-		when "Z"
-			@letterLoc.each do |letter|
-				letter[1] += 3
-				@matrix[letter[0]][letter[1]] = "R"
-			end
-		when "S"
-			@letterLoc.each do |letter|
-				letter[1] += 3
-				@matrix[letter[0]][letter[1]] = "G"
-			end
-		when "I"
-			@letterLoc.each do |letter|
-				letter[1] += 3
-				@matrix[letter[0]][letter[1]] = "C"
-			end
-		when "T"
-			@letterLoc.each do |letter|
-				letter[1] += 3
-				@matrix[letter[0]][letter[1]] = "M"
-			end
+	def showTest
+		@activeBlock.testBlock
+		@activeBlock.getTestMatrix.each do |line|
+				puts line.join(' ')
 		end
+	end
+
+	def showWithTetramino
+		@activeBlock.spawn
 		show
 	end
 
@@ -119,105 +79,36 @@ class Matrix
 	end
 
 	def setActiveTetramino(char)
-		@activeTetramino = char
-		@matrix = Array.new(4) {Array.new(4,".")}
 
-		if @activeTetramino == "I"
-			@letterLoc = [[1,0],[1,1],[1,2],[1,3]]
-			@letterLoc.each do |letter|
-				@matrix[letter[0]][letter[1]] = "c"
-			end
+		if char == "I"
+			@activeBlock = I_Block.new(self)
 		end
-		if @activeTetramino == "O"
-			@matrix = [['.','.'],['.','.']]
-			@letterLoc = [[0,0],[0,1],[1,0],[1,1]]
-			@letterLoc.each do |letter|
-				@matrix[letter[0]][letter[1]] = "y"
-			end
-			# puts "y y"
-			# puts "y y"
+		if char == "O"
+			@activeBlock = O_Block.new(self)
 		end
-		if @activeTetramino == "Z"
-			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
-			@letterLoc = [[0,0],[0,1],[1,1],[1,2]]
-			@letterLoc.each do |letter|
-				@matrix[letter[0]][letter[1]] = "r"
-			end
-			# puts "r r ."
-			# puts ". r r"
-			# puts ". . ."
+		if char == "Z"
+			@activeBlock = Z_Block.new(self)
 		end
-		if @activeTetramino == "S"
-			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
-			@letterLoc = [[0,1],[0,2],[1,0],[1,1]]
-			@letterLoc.each do |letter|
-				@matrix[letter[0]][letter[1]] = "g"
-			end
-			# puts ". g g"
-			# puts "g g ."
-			# puts ". . ."
+		if char == "S"
+			@activeBlock = S_Block.new(self)
 		end
-		if @activeTetramino == "J"
-			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
-			@letterLoc = [[0,0],[1,0],[1,1],[1,2]]
-			@letterLoc.each do |letter|
-				@matrix[letter[0]][letter[1]] = "b"
-			end
-			# puts "b . ."
-			# puts "b b b"
-			# puts ". . ."
+		if char == "J"
+			@activeBlock = J_Block.new(self)
 		end
-		if @activeTetramino == "L"
-			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
-			@letterLoc = [[0,2],[1,0],[1,1],[1,2]]
-			@letterLoc.each do |letter|
-				@matrix[letter[0]][letter[1]] = "o"
-			end
-			# puts ". . o"
-			# puts "o o o"
-			# puts ". . ."
+		if char == "L"
+			@activeBlock = L_Block.new(self)
 		end
-		if @activeTetramino == "T"
-			@matrix = [['.','.','.'],['.','.','.'],['.','.','.']]
-			@letterLoc = [[0,1],[1,0],[1,1],[1,2]]
-			@letterLoc.each do |letter|
-				@matrix[letter[0]][letter[1]] = "m"
-			end
-			# puts ". m ."
-			# puts "m m m"
-			# puts ". . ."
+		if char == "T"
+			@activeBlock = T_Block.new(self)
 		end
 	end
 
 	def rotate
-		case @activeTetramino
-		when "I"
-			rotateI
-		when "Z"
-			rotateZ
-		when "S"
-			rotateS
-		when "J"
-			rotateJ
-		when "L"
-			rotateL
-		when "T"
-			rotateT
-		end
+		@activeBlock.rotate
 	end
 
-	def removeBeforeRotate
-		@matrix[@letterLoc[0][0]][@letterLoc[0][1]] = "."
-		@matrix[@letterLoc[1][0]][@letterLoc[1][1]] = "."
-		@matrix[@letterLoc[2][0]][@letterLoc[2][1]] = "."
-		@matrix[@letterLoc[3][0]][@letterLoc[3][1]] = "."
-	end
-
-	def moveBlock(letterLocIndex, xMove, yMove, letterLocTemp, letter)
-		x = letterLocTemp[0]
-		y = letterLocTemp[1]
-		@matrix[x + xMove][y + yMove] = letter
-		@letterLoc[letterLocIndex] = [x + xMove, y + yMove]
+	def getMatrix
+		return @matrix
 	end
 
 end
