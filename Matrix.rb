@@ -78,33 +78,16 @@ class Matrix
 		@numCleared = @numCleared + 1
 	end
 
-	def setActiveTetramino(char)
-
-		if char == "I"
-			@activeBlock = I_Block.new(self)
-		end
-		if char == "O"
-			@activeBlock = O_Block.new(self)
-		end
-		if char == "Z"
-			@activeBlock = Z_Block.new(self)
-		end
-		if char == "S"
-			@activeBlock = S_Block.new(self)
-		end
-		if char == "J"
-			@activeBlock = J_Block.new(self)
-		end
-		if char == "L"
-			@activeBlock = L_Block.new(self)
-		end
-		if char == "T"
-			@activeBlock = T_Block.new(self)
-		end
+	def setActiveBlock(activeBlock)
+		@activeBlock = activeBlock
 	end
 
 	def rotate
 		@activeBlock.rotate
+	end
+
+	def moveLeft
+		@activeBlock.move(0,-1)
 	end
 
 	def getMatrix

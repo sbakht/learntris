@@ -32,21 +32,30 @@ while
             when "s"
                 matrix.clearBlocks
             when "I"
-                matrix.setActiveTetramino("I")
+                activeBlock = I_Block.new(matrix)
+                matrix.setActiveBlock(activeBlock)
             when "O"
-                matrix.setActiveTetramino("O")
+                activeBlock = O_Block.new(matrix)
+                matrix.setActiveBlock(activeBlock)
             when "Z"
-                matrix.setActiveTetramino("Z")
+                activeBlock = Z_Block.new(matrix)
+                matrix.setActiveBlock(activeBlock)
             when "S"
-                matrix.setActiveTetramino("S")
+                activeBlock = S_Block.new(matrix)
+                matrix.setActiveBlock(activeBlock)
             when "J"
-                matrix.setActiveTetramino("J")
+                activeBlock = J_Block.new(matrix)
+                matrix.setActiveBlock(activeBlock)
             when "L"
-                matrix.setActiveTetramino("L")
+                activeBlock = L_Block.new(matrix)
+                matrix.setActiveBlock(activeBlock)
             when "T"
-                matrix.setActiveTetramino("T")
+                activeBlock = T_Block.new(matrix)
+                matrix.setActiveBlock(activeBlock)
             when ")"
                 matrix.rotate
+            when "<"
+                matrix.moveLeft
             when "t"
                 matrix.showTest
             when ";"
