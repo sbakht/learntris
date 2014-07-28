@@ -1,4 +1,5 @@
 require_relative "Block"
+require_relative "Rotations"
 
 class Matrix
 	@matrix = ""
@@ -28,7 +29,7 @@ class Matrix
 	end
 
 	def setCleared
-		@matrix = ". . . . . . . . . .\n" * 22
+		@matrix = @matrix = Array.new(22) {Array.new(10,".")}
 	end
 
 	def setFromInput
@@ -60,6 +61,47 @@ class Matrix
 		end
 	end
 
+	def showWithTetramino
+		case @activeTetramino
+		when "O"
+			@letterLoc.each do |letter|
+				letter[1] += 4
+				@matrix[letter[0]][letter[1]] = "Y"
+			end
+		when "L"
+			@letterLoc.each do |letter|
+				letter[1] += 3
+				@matrix[letter[0]][letter[1]] = "O"
+			end
+		when "J"
+			@letterLoc.each do |letter|
+				letter[1] += 3
+				@matrix[letter[0]][letter[1]] = "B"
+			end
+		when "Z"
+			@letterLoc.each do |letter|
+				letter[1] += 3
+				@matrix[letter[0]][letter[1]] = "R"
+			end
+		when "S"
+			@letterLoc.each do |letter|
+				letter[1] += 3
+				@matrix[letter[0]][letter[1]] = "G"
+			end
+		when "I"
+			@letterLoc.each do |letter|
+				letter[1] += 3
+				@matrix[letter[0]][letter[1]] = "C"
+			end
+		when "T"
+			@letterLoc.each do |letter|
+				letter[1] += 3
+				@matrix[letter[0]][letter[1]] = "M"
+			end
+		end
+		show
+	end
+
 	def printScore
 		puts @score
 	end
@@ -78,7 +120,7 @@ class Matrix
 
 	def setActiveTetramino(char)
 		@activeTetramino = char
-		@matrix = [['.','.','.','.'],['.','.','.','.'],['.','.','.','.'],['.','.','.','.']]
+		@matrix = Array.new(4) {Array.new(4,".")}
 
 		if @activeTetramino == "I"
 			@letterLoc = [[1,0],[1,1],[1,2],[1,3]]
@@ -147,163 +189,6 @@ class Matrix
 		end
 	end
 
-	def rotateI
-		letterLocTemp = @letterLoc[0]
-		removeBeforeRotate
-		letter = "c"
-		if @rotations == 0
-			moveBlock(0, -1, 2, letterLocTemp, letter)
-			moveBlock(1, 0, 2, letterLocTemp, letter)
-			moveBlock(2, 1, 2, letterLocTemp, letter)
-			moveBlock(3, 2, 2, letterLocTemp, letter)
-			@rotations = 1
-		elsif @rotations == 1
-			moveBlock(0, 2, 1, letterLocTemp, letter)
-			moveBlock(1, 2, 0, letterLocTemp, letter)
-			moveBlock(2, 2, -1, letterLocTemp, letter)
-			moveBlock(3, 2, -2, letterLocTemp, letter)
-			@rotations = 2
-		elsif @rotations == 2
-			moveBlock(0, 1, -2, letterLocTemp, letter)
-			moveBlock(1, 0, -2, letterLocTemp, letter)
-			moveBlock(2, -1, -2, letterLocTemp, letter)
-			moveBlock(3, -2, -2, letterLocTemp, letter)
-			@rotations = 3
-		elsif @rotations == 3
-			moveBlock(0, -2, -1, letterLocTemp, letter)
-			moveBlock(1, -2, 0, letterLocTemp, letter)
-			moveBlock(2, -2, 1, letterLocTemp, letter)
-			moveBlock(3, -2, 2, letterLocTemp, letter)
-			@rotations = 4
-		end
-	end
-
-	def rotateZ
-		letterLocTemp = @letterLoc[2]
-		removeBeforeRotate
-		letter = "r"
-		if @rotations == 0
-			moveBlock(0, -1, 1, letterLocTemp, letter)
-			moveBlock(1, 0, 1, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, 0, letterLocTemp, letter)
-			@rotations = 1
-		elsif @rotations == 1
-			moveBlock(0, 0, -1, letterLocTemp, letter)
-			moveBlock(1, 1, 0, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, 1, letterLocTemp, letter)
-			@rotations = 2
-		elsif @rotations == 2
-			moveBlock(0, 1, -1, letterLocTemp, letter)
-			moveBlock(1, 0, -1, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, -1, 0, letterLocTemp, letter)
-			@rotations = 3
-		end
-	end
-
-	def rotateS
-		letterLocTemp = @letterLoc[3]
-		removeBeforeRotate
-		letter = "g"
-		if @rotations == 0
-			moveBlock(0, -1, 0, letterLocTemp, letter)
-			moveBlock(1, 0, 1, letterLocTemp, letter)
-			moveBlock(2, 1, 1, letterLocTemp, letter)
-			moveBlock(3, 0, 0, letterLocTemp, letter)
-			@rotations = 1
-		elsif @rotations == 1
-			moveBlock(0, 0, 1, letterLocTemp, letter)
-			moveBlock(1, 1, 0, letterLocTemp, letter)
-			moveBlock(2, 1, -1, letterLocTemp, letter)
-			moveBlock(3, 0, 0, letterLocTemp, letter)
-			@rotations = 2
-		elsif @rotations == 2
-			moveBlock(0, 0, -1, letterLocTemp, letter)
-			moveBlock(1, 1, 0, letterLocTemp, letter)
-			moveBlock(2, -1, -1, letterLocTemp, letter)
-			moveBlock(3, 0, 0, letterLocTemp, letter)
-			@rotations = 3
-		end
-	end
-
-
-	def rotateJ
-		letterLocTemp = @letterLoc[2]
-		removeBeforeRotate
-		letter = "b"
-		if @rotations == 0
-			moveBlock(0, -1, 1, letterLocTemp, letter)
-			moveBlock(1, -1, 0, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, 0, letterLocTemp, letter)
-			@rotations = 1
-		elsif @rotations == 1
-			moveBlock(0, 0, -1, letterLocTemp, letter)
-			moveBlock(1, 0, 1, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, 1, letterLocTemp, letter)
-			@rotations = 2
-		elsif @rotations == 2
-			moveBlock(0, -1, 0, letterLocTemp, letter)
-			moveBlock(1, 1, 0, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, -1, letterLocTemp, letter)
-			@rotations = 3
-		end
-	end
-
-	def rotateL
-		letterLocTemp = @letterLoc[2]
-		removeBeforeRotate
-		letter = "o"
-		if @rotations == 0
-			moveBlock(0, -1, 0, letterLocTemp, letter)
-			moveBlock(1, 1, 0, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, 1, letterLocTemp, letter)
-			@rotations = 1
-		elsif @rotations == 1
-			moveBlock(0, 0, -1, letterLocTemp, letter)
-			moveBlock(1, 0, 1, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, -1, letterLocTemp, letter)
-			@rotations = 2
-		elsif @rotations == 2
-			moveBlock(0, 1, 0, letterLocTemp, letter)
-			moveBlock(1, -1, -1, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, -1, 0, letterLocTemp, letter)
-			@rotations = 3
-		end
-	end
-
-	def rotateT
-		letterLocTemp = @letterLoc[2]
-		removeBeforeRotate
-		letter = "m"
-		if @rotations == 0
-			moveBlock(0, -1, 0, letterLocTemp, letter)
-			moveBlock(1, 1, 0, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 0, 1, letterLocTemp, letter)
-			@rotations = 1
-		elsif @rotations == 1
-			moveBlock(0, 0, -1, letterLocTemp, letter)
-			moveBlock(1, 0, 1, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, 0, letterLocTemp, letter)
-			@rotations = 2
-		elsif @rotations == 2
-			moveBlock(0, 1, 0, letterLocTemp, letter)
-			moveBlock(1, -1, 0, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 0, -1, letterLocTemp, letter)
-			@rotations = 3
-		end
-	end
-
 	def rotate
 		case @activeTetramino
 		when "I"
@@ -319,7 +204,6 @@ class Matrix
 		when "T"
 			rotateT
 		end
-
 	end
 
 	def removeBeforeRotate
