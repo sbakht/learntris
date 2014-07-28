@@ -10,12 +10,14 @@ class Block
 	def rotate
 	end
 
-	# def moveBlock(x, y)
-	# 	@letterloc.each do |letter|
-	# 		letter[0] += x
-	# 		letter[1] += y
-	# 	end
-	# end
+	def move(x, y)
+		removeBeforeRotate
+		@letterLoc.each do |letter|
+			letter[0] += x
+			letter[1] += y
+			@matrix[letter[0]][letter[1]] = @blockLetter.upcase
+		end
+	end
 
 	def moveBlock(letterLocIndex, xMove, yMove, letterLocTemp, letter)
 		x = letterLocTemp[0]
