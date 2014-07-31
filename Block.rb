@@ -12,11 +12,12 @@ class Block
 	end
 
 	def move(y, x)
-		removeBeforeRotate
+		# removeBeforeRotate
 		good = true
 		@letterLoc.each do |letter|
 			good = false if (letter[1] + x < 0 || letter[1] + x >= 10) && @firstSpawn == false
 			good = false if (letter[1] + x < -3 || letter[1] + x >= 7) && @firstSpawn == true
+			good = false if letter[0] + y >= 22  && @firstSpawn == true
 		end
 		if good == true
 			@letterLoc.each do |letter|
