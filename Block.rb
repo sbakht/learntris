@@ -5,16 +5,24 @@ class Block
 		@instance = instance
 		@testMatrix = [['.','.','.'],['.','.','.'],['.','.','.']]
 		@matrix = @testMatrix
+		@firstSpawn = true
 	end
 
 	def rotate
 	end
 
-	def move(x, y)
+	def move(y, x)
 		removeBeforeRotate
+		good = true
 		@letterLoc.each do |letter|
-			letter[0] += x
-			letter[1] += y
+			good = false if (letter[1] + x < 0 || letter[1] + x >= 10) && @firstSpawn == false
+			good = false if (letter[1] + x < -3 || letter[1] + x >= 7) && @firstSpawn == true
+		end
+		if good == true
+			@letterLoc.each do |letter|
+				letter[0] += y
+				letter[1] += x
+			end
 		end
 	end
 
@@ -32,9 +40,9 @@ class Block
 	end
 
 	def spawn
+		initialzeSpawning
 		@matrix = @instance.getMatrix
 		@letterLoc.each do |letter|
-			letter[1] += 3
 			@matrix[letter[0]][letter[1]] = @blockLetter.upcase
 		end
 	end
@@ -49,5 +57,20 @@ class Block
 	def getTestMatrix
 		return @testMatrix
 	end
+
+	def getLetterLoc
+		print @letterLoc
+		print @firstSpawn
+	end
+
+	def initialzeSpawning
+		if @firstSpawn == true
+			@letterLoc.each do |letter|
+				letter[1] += 3
+			end
+			@firstSpawn = false
+		end
+	end
+
 
 end
