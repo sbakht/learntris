@@ -54,6 +54,10 @@ while
                 matrix.setActiveBlock(activeBlock)
             when ")"
                 matrix.rotate
+            when "("
+                matrix.rotate
+                matrix.rotate
+                matrix.rotate
             when "<"
                 matrix.moveLeft
             when ">"
