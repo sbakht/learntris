@@ -48,6 +48,15 @@ class Block
 		end
 	end
 
+	def lockInBlock
+		initialzeSpawning
+		@matrix = @instance.getMatrix
+		@letterLoc.each do |letter|
+			@matrix[letter[0]][letter[1]] = @blockLetter
+		end
+		@instance.setActiveBlock(nil)
+	end
+
 	def testBlock
 		@matrix = @testMatrix
 		@letterLoc.each do |letter|
