@@ -1,6 +1,7 @@
 require_relative "Matrix"
 
 matrix = Matrix.new
+activeBlock = nil
 
 while 
     input = gets.chomp.split(" ") #allows commands to be separated by spaces
@@ -17,6 +18,10 @@ while
             when "q"
                 exit #exits the code
             when "p"
+                if activeBlock != nil
+                    matrix.setCleared
+                    activeBlock.lockInBlock
+                end
                 matrix.show
             when "P"
                 matrix.setCleared
@@ -64,6 +69,8 @@ while
                 matrix.moveRight
             when "v"
                 matrix.moveDown
+            when "V"
+                matrix.moveToBottom
             when "t"
                 matrix.showTest
             when ";"

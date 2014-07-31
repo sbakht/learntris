@@ -98,6 +98,12 @@ class Matrix
 		@activeBlock.move(1, 0)
 	end
 
+	def moveToBottom
+		22.times do
+			@activeBlock.move(1, 0)
+		end
+	end
+
 	def getMatrix
 		return @matrix
 	end
