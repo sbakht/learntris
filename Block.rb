@@ -15,14 +15,12 @@ class Block
 		@letterLoc.each do |letter|
 			letter[0] += x
 			letter[1] += y
-			@matrix[letter[0]][letter[1]] = @blockLetter.upcase
 		end
 	end
 
 	def moveBlock(letterLocIndex, xMove, yMove, letterLocTemp, letter)
 		x = letterLocTemp[0]
 		y = letterLocTemp[1]
-		@matrix[x + xMove][y + yMove] = letter
 		@letterLoc[letterLocIndex] = [x + xMove, y + yMove]
 	end
 
