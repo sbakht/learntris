@@ -18,7 +18,7 @@ class Matrix
 	end
 
 	def setCleared
-		@matrix = @matrix = Array.new(22) {Array.new(10,".")}
+		@matrix = Array.new(22) {Array.new(10,".")}
 	end
 
 	def setFromInput
