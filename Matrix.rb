@@ -23,22 +23,20 @@ class Matrix
 	end
 
 	def setFromInput
-		@matrix = ""
+		@matrix = []
 	    22.times do
-	        @matrix = @matrix + gets.chomp + "\n"
+	        @matrix << gets.chomp.split(' ')
 	    end
 	end
 
 	def clearBlocks
-		arr = @matrix.split("\n") #array of the matrix
-		arr.each_with_index do |line, i|
+		@matrix.each_with_index do |line, i|
 			if !line.include?(".")
-				arr[i] = ". . . . . . . . . ."
+				@matrix[i] = Array.new(10,".")
 				incrementScore
 				incrementNumCleared
 			end
 		end
-		@matrix = arr.join("\n")
 	end
 
 	def show
