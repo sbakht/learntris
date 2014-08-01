@@ -2,7 +2,6 @@
 class I_Block < Block
 
 	def initialize(instance)
-		# @rotations = 0
 		super
 		@blockLetter = "c"
 		@letterLoc = [[1,0],[1,1],[1,2],[1,3]]
