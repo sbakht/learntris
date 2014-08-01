@@ -20,7 +20,7 @@ while
             when "p"
                 if activeBlock != nil
                     matrix.setCleared
-                    print matrix.getLockedBlocks if cmds.include?("Z")
+                    # print matrix.getLockedBlocks if cmd.include?("I")
                     # activeBlock.lockInBlock
                     matrix.show
                 else
@@ -28,6 +28,7 @@ while
                 end
             when "P"
                 matrix.setCleared
+                # print matrix.getLockedBlocks if cmds.include?(["V","I"])
                 matrix.showWithTetramino
             when "g"
                 matrix.setFromInput

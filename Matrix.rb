@@ -45,7 +45,7 @@ class Matrix
 		if @matrix.is_a?(Array) #turns into string if is an array
 			@lockedBlocks.each do |char, values|
 				values.each do |coord|
-					@matrix[coord[0]][coord[1]] = char
+					@matrix[coord[0]][coord[1]] = char[0]
 				end
 			end
 			if @activeBlock != nil && @lockedBlocks.length > 1

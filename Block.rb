@@ -61,7 +61,14 @@ class Block
 			end
 		end
 
-		@instance.getLockedBlocks[@blockLetter] = @letterLoc if collision
+		if collision
+			(1..10).each do |i| #dic keys are block letters, so prevents repeating block error
+				if !@instance.getLockedBlocks[@blockLetter * i]
+					@instance.getLockedBlocks[@blockLetter * i] = @letterLoc
+					break 
+				end
+			end
+		end
 
 		if good == true
 			@letterLoc.each do |letter|
