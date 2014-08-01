@@ -10,11 +10,12 @@ require_relative "T_Block"
 class Matrix
 
 	def initialize
-		@matrix = @matrix = ". . . . . . . . . .\n" * 22
+		@matrix = ". . . . . . . . . .\n" * 22
 		@score = 0
 		@numCleared = 0
 		@rotations = 0
 		@activeBlock = nil
+		@lockedBlocks = {}
 	end
 
 	def setCleared
@@ -42,6 +43,26 @@ class Matrix
 
 	def show
 		if @matrix.is_a?(Array) #turns into string if is an array
+			@lockedBlocks.each do |char, values|
+				values.each do |coord|
+					@matrix[coord[0]][coord[1]] = char
+				end
+			end
+			@matrix.each do |line|
+				puts line.join(' ')
+			end
+		else
+			puts @matrix
+		end
+	end
+
+	def showWithUpcase
+		if @matrix.is_a?(Array) #turns into string if is an array
+			@lockedBlocks.each do |char, values|
+				values.each do |coord|
+					@matrix[coord[0]][coord[1]] = char.upcase
+				end
+			end
 			@matrix.each do |line|
 				puts line.join(' ')
 			end
@@ -59,7 +80,7 @@ class Matrix
 
 	def showWithTetramino
 		@activeBlock.spawn
-		show
+		showWithUpcase
 	end
 
 	def printScore
@@ -108,4 +129,7 @@ class Matrix
 		return @matrix
 	end
 
+	def getLockedBlocks
+		return @lockedBlocks
+	end
 end
