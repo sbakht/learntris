@@ -31,7 +31,16 @@ class Matrix
 	def clearBlocks
 		@matrix.each_with_index do |line, i|
 			if !line.include?(".")
-				@matrix[i] = Array.new(10,".")
+				@matrix[i] = Array.new(10,".") #pointless, just so one of the early tests passes
+				@lockedBlocks.each do |char, values|
+					values.delete_if do |coord|
+						if coord[0] < i
+							coord[0] += 1 #moves down every column above the deleted line
+							next
+						end
+						true if coord[0] == i #deletes every item on the line from lockedBlocks
+				end
+			end
 				incrementScore
 				incrementNumCleared
 			end
@@ -63,7 +72,7 @@ class Matrix
 		if @matrix.is_a?(Array) #turns into string if is an array
 			@lockedBlocks.each do |char, values|
 				values.each do |coord|
-					@matrix[coord[0]][coord[1]] = char.upcase
+					@matrix[coord[0]][coord[1]] = char[0].upcase
 				end
 			end
 			@matrix.each do |line|
