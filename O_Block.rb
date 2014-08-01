@@ -9,11 +9,12 @@ class O_Block < Block
 		@matrix = @testMatrix
 	end
 
-	def spawn
-		@matrix = @instance.getMatrix
-		@letterLoc.each do |letter|
-			letter[1] += 4
-			@matrix[letter[0]][letter[1]] = @blockLetter.upcase
+	def initialzeSpawning
+		if @firstSpawn == true
+			@letterLoc.each do |letter|
+				letter[1] += 4
+			end
+			@firstSpawn = false
 		end
 	end
 
