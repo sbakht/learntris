@@ -20,9 +20,12 @@ while
             when "p"
                 if activeBlock != nil
                     matrix.setCleared
-                    activeBlock.lockInBlock
+                    # print matrix.getLockedBlocks if cmds.include?("Z")
+                    # activeBlock.lockInBlock
+                    matrix.show
+                else
+                    matrix.show
                 end
-                matrix.show
             when "P"
                 matrix.setCleared
                 matrix.showWithTetramino
