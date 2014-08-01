@@ -20,7 +20,7 @@ while
             when "p"
                 if activeBlock != nil
                     matrix.setCleared
-                    # print matrix.getLockedBlocks if cmds.include?("Z")
+                    print matrix.getLockedBlocks if cmds.include?("Z")
                     # activeBlock.lockInBlock
                     matrix.show
                 else

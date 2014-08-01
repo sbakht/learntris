@@ -48,6 +48,12 @@ class Matrix
 					@matrix[coord[0]][coord[1]] = char
 				end
 			end
+			if @activeBlock != nil && @lockedBlocks.length > 1
+				@activeBlock.getLetterLoc.each do |letter|
+					@matrix[letter[0]][letter[1]] = @activeBlock.getBlockLetter.upcase
+				end
+			end
+
 			@matrix.each do |line|
 				puts line.join(' ')
 			end
@@ -79,8 +85,16 @@ class Matrix
 	end
 
 	def showWithTetramino
-		@activeBlock.spawn
-		showWithUpcase
+		if @activeBlock != nil
+			@activeBlock.spawn
+			if @lockedBlocks.length == 1
+				showWithUpcase
+			else
+				show
+			end
+		else
+			show
+		end
 	end
 
 	def printScore
@@ -116,12 +130,16 @@ class Matrix
 	end
 
 	def moveDown
-		@activeBlock.move(1, 0)
+		if @activeBlock != nil
+			@activeBlock.move(1, 0)
+		end
 	end
 
 	def moveToBottom
 		22.times do
-			@activeBlock.move(1, 0)
+			if @activeBlock != nil
+				@activeBlock.move(1, 0)
+			end
 		end
 	end
 
