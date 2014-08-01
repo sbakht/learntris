@@ -72,7 +72,7 @@ class Block
 		end
 	end
 
-	def moveBlock(letterLocIndex, xMove, yMove, letterLocTemp, letter)
+	def rotateLetter(letterLocIndex, xMove, yMove, letterLocTemp)
 		x = letterLocTemp[0]
 		y = letterLocTemp[1]
 		@letterLoc[letterLocIndex] = [x + xMove, y + yMove]

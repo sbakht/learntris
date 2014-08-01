@@ -11,32 +11,31 @@ class I_Block < Block
 	end
 
 	def rotate
-		letterLocTemp = @letterLoc[0]
+		rotateBy = @letterLoc[0]
 		removeBeforeRotate
-		letter = "c"
 		if @rotations == 0
-			moveBlock(0, -1, 2, letterLocTemp, letter)
-			moveBlock(1, 0, 2, letterLocTemp, letter)
-			moveBlock(2, 1, 2, letterLocTemp, letter)
-			moveBlock(3, 2, 2, letterLocTemp, letter)
+			rotateLetter(0, -1, 2, rotateBy)
+			rotateLetter(1, 0, 2, rotateBy)
+			rotateLetter(2, 1, 2, rotateBy)
+			rotateLetter(3, 2, 2, rotateBy)
 			@rotations = 1
 		elsif @rotations == 1
-			moveBlock(0, 2, 1, letterLocTemp, letter)
-			moveBlock(1, 2, 0, letterLocTemp, letter)
-			moveBlock(2, 2, -1, letterLocTemp, letter)
-			moveBlock(3, 2, -2, letterLocTemp, letter)
+			rotateLetter(0, 2, 1, rotateBy)
+			rotateLetter(1, 2, 0, rotateBy)
+			rotateLetter(2, 2, -1, rotateBy)
+			rotateLetter(3, 2, -2, rotateBy)
 			@rotations = 2
 		elsif @rotations == 2
-			moveBlock(0, 1, -2, letterLocTemp, letter)
-			moveBlock(1, 0, -2, letterLocTemp, letter)
-			moveBlock(2, -1, -2, letterLocTemp, letter)
-			moveBlock(3, -2, -2, letterLocTemp, letter)
+			rotateLetter(0, 1, -2, rotateBy)
+			rotateLetter(1, 0, -2, rotateBy)
+			rotateLetter(2, -1, -2, rotateBy)
+			rotateLetter(3, -2, -2, rotateBy)
 			@rotations = 3
 		elsif @rotations == 3
-			moveBlock(0, -2, -1, letterLocTemp, letter)
-			moveBlock(1, -2, 0, letterLocTemp, letter)
-			moveBlock(2, -2, 1, letterLocTemp, letter)
-			moveBlock(3, -2, 2, letterLocTemp, letter)
+			rotateLetter(0, -2, -1, rotateBy)
+			rotateLetter(1, -2, 0, rotateBy)
+			rotateLetter(2, -2, 1, rotateBy)
+			rotateLetter(3, -2, 2, rotateBy)
 			@rotations = 4
 		end
 	end
