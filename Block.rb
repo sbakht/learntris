@@ -72,9 +72,9 @@ class Block
 		end
 	end
 
-	def rotateLetter(letterLocIndex, xMove, yMove, letterLocTemp)
-		x = letterLocTemp[0]
-		y = letterLocTemp[1]
+	def rotateLetter(letterLocIndex, xMove, yMove, rotateByLetter)
+		x = rotateByLetter[0]
+		y = rotateByLetter[1]
 		@letterLoc[letterLocIndex] = [x + xMove, y + yMove]
 	end
 
@@ -102,11 +102,6 @@ class Block
 
 	def getTestMatrix
 		return @testMatrix
-	end
-
-	def getLetterLoc
-		print @letterLoc
-		print @firstSpawn
 	end
 
 	def initializeSpawning
