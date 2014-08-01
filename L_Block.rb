@@ -8,26 +8,25 @@ class L_Block < Block
 	end
 
 	def rotate
-		letterLocTemp = @letterLoc[2]
+		rotateBy = @letterLoc[2]
 		removeBeforeRotate
-		letter = "o"
 		if @rotations == 0
-			moveBlock(0, -1, 0, letterLocTemp, letter)
-			moveBlock(1, 1, 0, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, 1, letterLocTemp, letter)
+			rotateLetter(0, -1, 0, rotateBy)
+			rotateLetter(1, 1, 0, rotateBy)
+			rotateLetter(2, 0, 0, rotateBy)
+			rotateLetter(3, 1, 1, rotateBy)
 			@rotations = 1
 		elsif @rotations == 1
-			moveBlock(0, 0, -1, letterLocTemp, letter)
-			moveBlock(1, 0, 1, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, 1, -1, letterLocTemp, letter)
+			rotateLetter(0, 0, -1, rotateBy)
+			rotateLetter(1, 0, 1, rotateBy)
+			rotateLetter(2, 0, 0, rotateBy)
+			rotateLetter(3, 1, -1, rotateBy)
 			@rotations = 2
 		elsif @rotations == 2
-			moveBlock(0, 1, 0, letterLocTemp, letter)
-			moveBlock(1, -1, -1, letterLocTemp, letter)
-			moveBlock(2, 0, 0, letterLocTemp, letter)
-			moveBlock(3, -1, 0, letterLocTemp, letter)
+			rotateLetter(0, 1, 0, rotateBy)
+			rotateLetter(1, -1, -1, rotateBy)
+			rotateLetter(2, 0, 0, rotateBy)
+			rotateLetter(3, -1, 0, rotateBy)
 			@rotations = 3
 		end
 	end
