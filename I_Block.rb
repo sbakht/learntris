@@ -35,7 +35,7 @@ class I_Block < Block
 			rotateLetter(1, -2, 0, rotateBy)
 			rotateLetter(2, -2, 1, rotateBy)
 			rotateLetter(3, -2, 2, rotateBy)
-			@rotations = 4
+			@rotations = 0
 		end
 	end
 

@@ -28,6 +28,12 @@ class L_Block < Block
 			rotateLetter(2, 0, 0, rotateBy)
 			rotateLetter(3, -1, 0, rotateBy)
 			@rotations = 3
+		elsif @rotations == 3
+			rotateLetter(0, 0, 1, rotateBy)
+			rotateLetter(1, -1, 1, rotateBy)
+			rotateLetter(2, 0, 0, rotateBy)
+			rotateLetter(3, 0, -1, rotateBy)
+			@rotations = 0
 		end
 	end
 
