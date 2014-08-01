@@ -15,7 +15,7 @@ class Block
 		# removeBeforeRotate
 		initialzeSpawning
 		good = true
-		atMaxDepth = false
+		collision = false
 		@instance.getLockedBlocks.each do |key, values|
 				values.each do |coord|
 					@letterLoc.each do |letter|
@@ -23,16 +23,21 @@ class Block
 						# puts
 						# print letter
 						# puts
+						if coord == [letter[0] + y, letter[1] + x] && !@letterLoc.include?([letter[0] + y, letter[1] + x])
+							good = false
+							collision = true
+						end
 						if coord == [letter[0] + y, letter[1]] && !@letterLoc.include?([letter[0] + y, letter[1]])
 							good = false
-							atMaxDepth = true
+							collision = true
+							@instance.setActiveBlock(nil)
 						end
 					end
 			end
 		end
 
 		@instance.getLockedBlocks.each do |lockedBlock|
-			atMaxDepth = false if lockedBlock == @letterLoc
+			collision = false if lockedBlock == @letterLoc
 		end
 
 		@letterLoc.each do |letter|
@@ -43,6 +48,7 @@ class Block
 			if letter[0] + y >= 22
 				good = false
 				match = false
+				# @instance.setActiveBlock(nil)
 
 				if @instance.getLockedBlocks.length == 0
 					@instance.getLockedBlocks[@blockLetter] = @letterLoc
@@ -55,7 +61,7 @@ class Block
 			end
 		end
 
-		@instance.getLockedBlocks[@blockLetter] = @letterLoc if atMaxDepth
+		@instance.getLockedBlocks[@blockLetter] = @letterLoc if collision
 
 		if good == true
 			@letterLoc.each do |letter|
@@ -124,5 +130,8 @@ class Block
 		return @blockLetter
 	end
 
+	def getLetterLoc
+		return @letterLoc
+	end
 
 end
