@@ -12,17 +12,12 @@ class Block
 	end
 
 	def move(y, x)
-		# removeBeforeRotate
-		initialzeSpawning
+		initializeSpawning
 		good = true
 		collision = false
 		@instance.getLockedBlocks.each do |key, values|
 				values.each do |coord|
 					@letterLoc.each do |letter|
-						# print coord
-						# puts
-						# print letter
-						# puts
 						if coord == [letter[0] + y, letter[1] + x] && !@letterLoc.include?([letter[0] + y, letter[1] + x])
 							good = false
 							collision = true
@@ -48,7 +43,6 @@ class Block
 			if letter[0] + y >= 22
 				good = false
 				match = false
-				# @instance.setActiveBlock(nil)
 
 				if @instance.getLockedBlocks.length == 0
 					@instance.getLockedBlocks[@blockLetter] = @letterLoc
@@ -92,21 +86,12 @@ class Block
 	end
 
 	def spawn
-		initialzeSpawning
+		initializeSpawning
 		@matrix = @instance.getMatrix
 		@letterLoc.each do |letter|
 			@matrix[letter[0]][letter[1]] = @blockLetter.upcase
 		end
 	end
-
-	# def lockInBlock
-	# 	initialzeSpawning
-	# 	@matrix = @instance.getMatrix
-	# 	@letterLoc.each do |letter|
-	# 		# @matrix[letter[0]][letter[1]] = @blockLetter
-	# 	end
-	# 	# @instance.setActiveBlock(nil)
-	# end
 
 	def testBlock
 		@matrix = @testMatrix
@@ -124,7 +109,7 @@ class Block
 		print @firstSpawn
 	end
 
-	def initialzeSpawning
+	def initializeSpawning
 		if @firstSpawn == true
 			@letterLoc.each do |letter|
 				letter[1] += 3

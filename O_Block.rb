@@ -9,7 +9,7 @@ class O_Block < Block
 		@matrix = @testMatrix
 	end
 
-	def initialzeSpawning
+	def initializeSpawning
 		if @firstSpawn == true
 			@letterLoc.each do |letter|
 				letter[1] += 4
