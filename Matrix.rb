@@ -13,7 +13,6 @@ class Matrix
 		@matrix = ". . . . . . . . . .\n" * 22
 		@score = 0
 		@numCleared = 0
-		@rotations = 0
 		@activeBlock = nil
 		@lockedBlocks = {}
 	end
