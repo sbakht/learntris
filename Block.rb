@@ -50,7 +50,14 @@ class Block
 				@instance.getLockedBlocks.each do |key, values|
 					match = true if values == @letterLoc
 				end
-				@instance.getLockedBlocks[@blockLetter] = @letterLoc if !match
+				if !match
+					(1..10).each do |i| #dic keys are block letters, so prevents repeating block error
+						if !@instance.getLockedBlocks[@blockLetter * i]
+							@instance.getLockedBlocks[@blockLetter * i] = @letterLoc
+							break 
+						end
+					end
+				end
 				break
 			end
 		end
