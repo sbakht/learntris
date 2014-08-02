@@ -5,7 +5,7 @@ matrix = Matrix.new
 activeBlock = nil
 paused = false
 gameStarted = false
-play = true
+play = false
 play = true if ARGV[0] == "p"
 
 if !play
@@ -50,6 +50,7 @@ while
                         matrix.setCleared
                         # print matrix.getLockedBlocks if cmds.include?(["V","I"])
                         matrix.showWithTetramino
+                        puts "Game Over" if matrix.gameOver
                     when "g"
                         matrix.setFromInput
                     when "c"

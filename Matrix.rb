@@ -156,4 +156,14 @@ class Matrix
 	def getLockedBlocks
 		return @lockedBlocks
 	end
+
+	def gameOver
+		@lockedBlocks.each do |char, values|
+			values.each do |coord|
+				@matrix[coord[0]][coord[1]] = char[0].upcase
+				return true if coord[0] <= 1
+			end
+		end
+		return false
+	end
 end
