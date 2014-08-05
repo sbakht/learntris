@@ -5,7 +5,7 @@ matrix = Matrix.new
 activeBlock = nil
 paused = false
 gameStarted = false
-play = false
+play = true
 play = true if ARGV[0] == "p"
 
 if !play
@@ -131,15 +131,13 @@ if play
                 when "p"
                     if activeBlock != nil
                         matrix.setCleared
-                        # print matrix.getLockedBlocks if cmd.include?("I")
-                        # activeBlock.lockInBlock
                         matrix.show
                     else
                         matrix.show if !input.include?("@")
                     end
                 when "P"
+                    system ("cls")
                     matrix.setCleared
-                    # print matrix.getLockedBlocks if cmds.include?(["V","I"])
                     matrix.showWithTetramino
                 when "g"
                     matrix.setFromInput
@@ -154,38 +152,83 @@ if play
                 when "I"
                     activeBlock = I_Block.new(matrix)
                     matrix.setActiveBlock(activeBlock)
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "O"
                     activeBlock = O_Block.new(matrix)
                     matrix.setActiveBlock(activeBlock)
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "Z"
                     activeBlock = Z_Block.new(matrix)
                     matrix.setActiveBlock(activeBlock)
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "S"
                     activeBlock = S_Block.new(matrix)
                     matrix.setActiveBlock(activeBlock)
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "J"
                     activeBlock = J_Block.new(matrix)
                     matrix.setActiveBlock(activeBlock)
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "L"
                     activeBlock = L_Block.new(matrix)
                     matrix.setActiveBlock(activeBlock)
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "T"
                     activeBlock = T_Block.new(matrix)
                     matrix.setActiveBlock(activeBlock)
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when ")"
                     matrix.rotate
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "("
                     matrix.rotate
                     matrix.rotate
                     matrix.rotate
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "<"
                     matrix.moveLeft
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when ">"
                     matrix.moveRight
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "v"
                     matrix.moveDown
+                    matrix.setCleared
+                    matrix.showWithTetramino
+                    matrix.clearBlocks
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "V"
                     matrix.moveToBottom
+                    matrix.setCleared
+                    matrix.showWithTetramino
+                    matrix.clearBlocks
+                    system ("cls")
+                    matrix.setCleared
+                    matrix.showWithTetramino
                 when "t"
                     matrix.showTest
                 when ";"
