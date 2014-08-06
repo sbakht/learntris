@@ -11,29 +11,17 @@ class J_Block < Block
 		rotateBy = @letterLoc[2]
 		removeBeforeRotate
 		if @rotations == 0
-			rotateLetter(0, -1, 1, rotateBy)
-			rotateLetter(1, -1, 0, rotateBy)
-			rotateLetter(2, 0, 0, rotateBy)
-			rotateLetter(3, 1, 0, rotateBy)
-			@rotations = 1
+			move = [[-1,1], [-1,0], [0,0], [1,0]]
+			@rotations = 1 if rotateLetter(move, rotateBy)
 		elsif @rotations == 1
-			rotateLetter(0, 0, -1, rotateBy)
-			rotateLetter(1, 0, 1, rotateBy)
-			rotateLetter(2, 0, 0, rotateBy)
-			rotateLetter(3, 1, 1, rotateBy)
-			@rotations = 2
+			move = [[0,-1], [0,1], [0,0], [1,1]]
+			@rotations = 2 if rotateLetter(move, rotateBy)
 		elsif @rotations == 2
-			rotateLetter(0, -1, 0, rotateBy)
-			rotateLetter(1, 1, 0, rotateBy)
-			rotateLetter(2, 0, 0, rotateBy)
-			rotateLetter(3, 1, -1, rotateBy)
-			@rotations = 3
+			move = [[-1,0], [1,0], [0,0], [1,-1]]
+			@rotations = 3 if rotateLetter(move, rotateBy)
 		elsif @rotations == 3
-			rotateLetter(0, 0, 1, rotateBy)
-			rotateLetter(1, -1, -1, rotateBy)
-			rotateLetter(2, 0, 0, rotateBy)
-			rotateLetter(3, 0, -1, rotateBy)
-			@rotations = 0
+			move = [[0,1], [-1,-1], [0,0], [0,-1]]			
+			@rotations = 0 if rotateLetter(move, rotateBy)
 		end
 	end
 

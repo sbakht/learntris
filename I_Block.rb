@@ -13,29 +13,17 @@ class I_Block < Block
 		rotateBy = @letterLoc[0]
 		removeBeforeRotate
 		if @rotations == 0
-			rotateLetter(0, -1, 2, rotateBy)
-			rotateLetter(1, 0, 2, rotateBy)
-			rotateLetter(2, 1, 2, rotateBy)
-			rotateLetter(3, 2, 2, rotateBy)
-			@rotations = 1
+			move = [[-1,2], [0,2], [1,2], [2,2]]
+			@rotations = 1 if rotateLetter(move, rotateBy)
 		elsif @rotations == 1
-			rotateLetter(0, 2, 1, rotateBy)
-			rotateLetter(1, 2, 0, rotateBy)
-			rotateLetter(2, 2, -1, rotateBy)
-			rotateLetter(3, 2, -2, rotateBy)
-			@rotations = 2
+			move = [[2,1], [2,0], [2,-1], [2,-2]]
+			@rotations = 2 if rotateLetter(move, rotateBy)
 		elsif @rotations == 2
-			rotateLetter(0, 1, -2, rotateBy)
-			rotateLetter(1, 0, -2, rotateBy)
-			rotateLetter(2, -1, -2, rotateBy)
-			rotateLetter(3, -2, -2, rotateBy)
-			@rotations = 3
+			move = [[1,-2], [0,-2], [-1,-2], [-2,-2]]
+			@rotations = 3 if rotateLetter(move, rotateBy)
 		elsif @rotations == 3
-			rotateLetter(0, -2, -1, rotateBy)
-			rotateLetter(1, -2, 0, rotateBy)
-			rotateLetter(2, -2, 1, rotateBy)
-			rotateLetter(3, -2, 2, rotateBy)
-			@rotations = 0
+			move = [[-2,-1], [-2,0], [-2,1], [-2,2]]
+			@rotations = 0 if rotateLetter(move, rotateBy)
 		end
 	end
 
