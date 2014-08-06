@@ -6,6 +6,7 @@ class Block
 		@testMatrix = [['.','.','.'],['.','.','.'],['.','.','.']]
 		@matrix = @testMatrix
 		@firstSpawn = true
+		@tempLetterLoc = []
 	end
 
 	def rotate
@@ -79,10 +80,27 @@ class Block
 		end
 	end
 
-	def rotateLetter(letterLocIndex, xMove, yMove, rotateByLetter)
-		x = rotateByLetter[0]
-		y = rotateByLetter[1]
-		@letterLoc[letterLocIndex] = [x + xMove, y + yMove]
+	def rotateLetter(move, rotateByLetter)
+		y = rotateByLetter[0]
+		x = rotateByLetter[1]
+		if !@instance.getLockedBlocks.empty?
+			@instance.getLockedBlocks.each do |key, values|
+				move.each_with_index do |mv, i|
+					values.each do |coord|
+						if coord == [y + mv[0], x + mv[1]]
+							@letterLoc = @tempLetterLoc
+							return false
+						end
+					end
+					@letterLoc[i] = [y + mv[0], x + mv[1]]
+				end
+			end
+		else
+			move.each_with_index do |mv, i|
+				@letterLoc[i] = [y + mv[0], x + mv[1]]
+			end	
+		end	
+		return true
 	end
 
 	def removeBeforeRotate
