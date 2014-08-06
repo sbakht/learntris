@@ -10,6 +10,7 @@ class L_Block < Block
 	def rotate
 		rotateBy = @letterLoc[2]
 		removeBeforeRotate
+		@tempLetterLoc = @letterLoc.dup
 		if @rotations == 0
 			move = [[-1,0], [1,0], [0,0], [1,1]]
 			@rotations = 1 if rotateLetter(move, rotateBy)
